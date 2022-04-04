@@ -1,0 +1,19 @@
+{
+  "name": "kroko",
+  "version": "1.0.0",
+  "description": "cli tool ",
+  "main": "index.js",
+  "rootDir": ".",
+  "author": "Lauri Meltti",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "kroko": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^8.3.0",
+    "conf": "^10.1.1"
+  }
+}
