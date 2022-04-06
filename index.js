@@ -4,14 +4,14 @@ import path from "path";
 import fs from "fs";
 import { getRFCTemplate } from "./RFC.js";
 
-const createRFC = (name) => {
-  fs.writeFileSync(`${name}.tsx`, getRFCTemplate({ name }));
-  console.log("haha");
+const createRFC = (name, { path }) => {
+  fs.writeFileSync(`${path}/${name}.tsx`, getRFCTemplate({ name }));
 };
 
 program
   .command("rfc <name>")
   .description("Creates base for component with given name")
+  .option("-p, --path <path>", "Save to path instead of current dir")
   .option("-l, --localization <name>", "Adds i18n hook")
   .action(createRFC);
 
