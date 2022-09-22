@@ -1,11 +1,21 @@
 #! /usr/bin/env node
 import { program } from "commander";
-import path from "path";
 import fs from "fs";
 import { getRFCTemplate } from "./RFC.js";
+import { exec } from "child_process";
 
 const createRFC = (name, { path }) => {
   fs.writeFileSync(`${path}/${name}.tsx`, getRFCTemplate({ name }));
+};
+
+const extractTailwindClasses = ({ path }) => {
+  exec(`cat ${path}`, (_, code, __) => {
+    //TODO: className: "..."
+    //TODO: classNames()
+    const regex = /(?<=className=)".*?"/g;
+    const classNames = code.match(regex);
+    console.log(classNames);
+  });
 };
 
 program
@@ -14,5 +24,11 @@ program
   .option("-p, --path <path>", "Save to path instead of current dir")
   .option("-l, --localization <name>", "Adds i18n hook")
   .action(createRFC);
+
+program
+  .command("twe")
+  .description("Extract tailwind classNames to separate classes setup")
+  .option("-p, --path <path>", "Path to file to do the refactor")
+  .action(extractTailwindClasses);
 
 program.parse();
