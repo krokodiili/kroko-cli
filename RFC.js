@@ -1,8 +1,14 @@
-const getRFCTemplate = ({ name }) => {
+const getRFCTemplate = ({ name, localization }) => {
   return `
 import React from 'react'
+${localization ? "import useTranslate from 'i18n-react'" : ""}
 
-const ${name}: React.FC = () => {
+interface Props {
+
+}
+
+const ${name}: React.FC<Props> = () => {
+${localization ? "const { t } = useTranslate()" : ""}
   return (
     <div>
       moro

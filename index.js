@@ -4,8 +4,13 @@ import fs from "fs";
 import { getRFCTemplate } from "./RFC.js";
 import { exec } from "child_process";
 
-const createRFC = (name, { path }) => {
-  fs.writeFileSync(`${path}/${name}.tsx`, getRFCTemplate({ name }));
+const createRFC = (name, { path, localization }) => {
+  fs.writeFileSync(
+    path ? `${path}/${name}.tsx` : `${name}.tsx`,
+    getRFCTemplate({ name, localization })
+  );
+};
+
 };
 
 const extractTailwindClasses = ({ path }) => {
